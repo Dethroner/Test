@@ -4,19 +4,12 @@
 # ** Local envs provisioning **
 #
 # Server #1 - Ansible node (Debian 8)
-# Server #2 - MOB server with predefined 'minecraft' user (Debian 8)
-#
-
-# pre-reqs:
-#
-# ~/.ssh/{id_rsa_mobdeploy.pem, id_rsa_mobdeploy.pub} - deployment key, added to mob-server repo
-# ~/.ssh/{id_rsa_mobadmin.pem, id_rsa_mobadmin.pub} - MOB-Admin user key
-# these keys should be placed in the repo ./vagrant/ssh or in ~/.ssh folder on your host
+# 
 #
 
 Vagrant.configure(2) do |config|
 
-  config.vm.box = "debian64.box"
+  config.vm.box = "debian/jessie64"
 
   config.vm.define "ansnode", primary: true do |ansnode|
     ansnode.vm.network "private_network", ip: "192.168.11.101"
