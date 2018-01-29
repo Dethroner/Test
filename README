@@ -23,9 +23,9 @@ vagrant up
 vagrant halt
 vagrant package
 
-# More easy path
+# More easy path (http://kvz.io/blog/2013/01/16/vagrant-tip-keep-virtualbox-guest-additions-in-sync/)
 # For vagrant < 1.1.5:
 # vagrant gem install vagrant-vbguest
 
-# For vagrant 1.1.5+ (thanks Lars Haugseth):
+# For vagrant 1.1.5+:
 # vagrant plugin install vagrant-vbguest
