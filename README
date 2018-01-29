@@ -1,0 +1,24 @@
+# Repack vagrant box for work vs VBoxGuestAdditions
+# Used manual by Fernando Aleman (https://gist.github.com/fernandoaleman/5083680)
+vagrant init debian/jessie64
+vagrant up
+
+vagrant ssh
+sudo apt-get -y update && apt-get -y install linux-headers-$(uname -r) make gcc
+cd /opt
+sudo wget -c http://download.virtualbox.org/virtualbox/5.2.0/VBoxGuestAdditions_5.2.0.iso  \
+-O VBoxGuestAdditions_5.2.0.iso
+sudo mount VBoxGuestAdditions_5.2.0.iso -o loop /mnt
+cd /mnt
+sudo sh VBoxLinuxAdditions.run
+cd /opt
+sudo rm -f
+exit
+
+# Now check that the Guest Additions work
+vagrant halt
+vagrant up
+
+# Package the new VM
+vagrant halt
+vagrant package
