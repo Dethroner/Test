@@ -22,3 +22,10 @@ vagrant up
 # Package the new VM
 vagrant halt
 vagrant package
+
+# More easy path
+# For vagrant < 1.1.5:
+# vagrant gem install vagrant-vbguest
+
+# For vagrant 1.1.5+ (thanks Lars Haugseth):
+# vagrant plugin install vagrant-vbguest
