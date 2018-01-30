@@ -1,8 +1,13 @@
+#The first manual you will get box with installed/updated modules that you need. This is more comfortable, if you need to deploy much typical VMs.
+#The second manual you will deploy the necessary infrastructure now. But each VM will be updated singly.
+
+
+# First
 # Repack vagrant box for work vs VBoxGuestAdditions
 # Used manual by Fernando Aleman (https://gist.github.com/fernandoaleman/5083680)
+
 vagrant init debian/jessie64
 vagrant up
-
 vagrant ssh
 sudo apt-get -y update && apt-get -y install linux-headers-$(uname -r) make gcc
 cd /opt
@@ -19,13 +24,16 @@ exit
 vagrant halt
 vagrant up
 
-# Package the new VM
+# Package the new box
 vagrant halt
 vagrant package
 
+
+# Second
 # More easy path (http://kvz.io/blog/2013/01/16/vagrant-tip-keep-virtualbox-guest-additions-in-sync/)
+
 # For vagrant < 1.1.5:
-# vagrant gem install vagrant-vbguest
+vagrant gem install vagrant-vbguest
 
 # For vagrant 1.1.5+:
-# vagrant plugin install vagrant-vbguest
+vagrant plugin install vagrant-vbguest
