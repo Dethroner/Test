@@ -1,0 +1,9 @@
+---
+- hosts: docker
+#  remote_user: dethroner
+  become: yes
+  become_method: sudo
+#  become_user: root
+  serial: 1
+  roles:
+    - docker
