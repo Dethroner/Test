@@ -23,9 +23,11 @@ pip install ansible
 cat /vagrant/ansible/ansible.cfg > /home/dethroner/.ansible.cfg
 chmod 640 /home/dethroner/.ansible.cfg
 chown dethroner:dethroner /home/dethroner/.ansible.cfg
-#mkdir -p /etc/ansible/
-#touch /etc/ansible/hosts
-#cat /vagrant/ansible/nodes >> /etc/ansible/hosts
+mkdir -p /etc/ansible/
+touch /etc/ansible/hosts
+cat /vagrant/ansible/inventory/inv >> /etc/ansible/hosts
+chmod 640 /etc/ansible/hosts
+chown dethroner:dethroner /etc/ansible/hosts
 
 # Auto cleanup
 apt-get autoremove -y
