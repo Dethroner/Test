@@ -1,0 +1,51 @@
+version: '2'
+ 
+networks:
+  wp-proxy:
+    driver: bridge
+  wp-db:
+    driver: bridge
+ 
+volumes:
+  db-mysql:
+  wp-uploads:
+  wp-plugins:
+ 
+services:
+ 
+  nginx:
+    image: jwilder/nginx-proxy
+    ports:
+      - 80:80
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+    networks:
+      - wp-proxy
+ 
+  wp:
+    image: wordpress:4.7
+    volumes:
+      - ./themes:/var/www/html/wp-content/themes
+      - wp-uploads:/var/www/html/wp-content/uploads
+      - wp-plugins:/var/www/html/wp-content/plugins
+    environment:
+      WORDPRESS_DB_PASSWORD : password
+      WORDPRESS_DB_HOST     : db
+      WORDPRESS_DB_USER     : wp
+      WORDPRESS_DB_NAME     : wp
+      VIRTUAL_HOST          : wp.local
+    networks:
+      - wp-proxy
+      - wp-db
+ 
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD   : root_password
+      MYSQL_PASSWORD        : password
+      MYSQL_USER            : wp
+      MYSQL_DATABASE        : wp
+    volumes:
+      - db-mysql:/var/lib/mysql
+    networks:
+      - wp-db
